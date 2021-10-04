@@ -1,0 +1,18 @@
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+.format-form {
+	display: flex;
+	justify-content: space-between;
+}
+.field {
+	display: flex;
+	flex-direction: column;
+}
+.form-control {
+	width: 650px;
+	padding-top: 4%;
+	margin: auto;
+}
