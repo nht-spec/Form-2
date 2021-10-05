@@ -57,13 +57,13 @@ function InputField(props) {
 		}
 
 		// reset form when finish submit
-		if (onerror.validValue === true) {
-			setName('');
-			setEmail('');
-			setContact('');
-			setGender('');
-			setNotes('');
-		}
+		// if (onerror.validValue === true) {
+		// 	setName('');
+		// 	setEmail('');
+		// 	setContact('');
+		// 	setGender('');
+		// 	setNotes('');
+		// }
 	};
 
 	if (onchange) {
@@ -85,7 +85,7 @@ function InputField(props) {
 							margin='dense'
 							error={onerror.message.name}
 							helperText={onerror.message.name}
-							value={name}
+							value={name || ''}
 							onChange={(e) => setName(e.target.value)}
 							type='text'
 						/>
@@ -98,7 +98,7 @@ function InputField(props) {
 							margin='dense'
 							error={onerror.message.email}
 							helperText={onerror.message.email}
-							value={email}
+							value={email || ''}
 							onChange={(e) => setEmail(e.target.value)}
 							type='text'
 						/>
@@ -113,7 +113,7 @@ function InputField(props) {
 							margin='dense'
 							error={onerror.message.contact}
 							helperText={onerror.message.contact}
-							value={contact}
+							value={contact || ''}
 							onChange={(e) => setContact(e.target.value)}
 							type='text'
 						/>
@@ -127,7 +127,7 @@ function InputField(props) {
 							error={onerror.message.gender}
 							helperText={onerror.message.gender}
 							select
-							value={gender}
+							value={gender || ''}
 							onChange={handleChange}
 						>
 							{genders.map((option) => (

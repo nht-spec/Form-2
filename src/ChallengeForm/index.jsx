@@ -2,13 +2,9 @@ import {Button, InputLabel, Typography} from '@mui/material';
 import React, {useState} from 'react';
 import ValidationForm from '../components/ValidationForm';
 import './style.scss';
-const MODE = {
-	SAVE: 'save',
-	EDIT: 'edit',
-};
 
 function ChallengeForm(props) {
-	const [mode, setMode] = useState(MODE.SAVE);
+	const [showResults, setShowResults] = useState(false);
 	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
 	const [contact, setContact] = useState('');
@@ -16,69 +12,67 @@ function ChallengeForm(props) {
 	const [notes, setNotes] = useState('');
 
 	const handeFormSubmit = (values) => {
-		if (typeof values === 'object') {
-			MODE.SAVE = values;
-			setMode(MODE.EDIT);
+		if (values) {
+			setShowResults(true);
 		}
+
 		setName(values.fullname);
 		setEmail(values.email);
 		setContact(values.contact);
 		setGender(values.gender);
 		setNotes(values.notes);
 	};
+
 	return (
 		<div>
-			{mode === MODE.SAVE && (
-				<>
-					<ValidationForm onsubmit={handeFormSubmit} />
-				</>
-			)}
-			{mode === MODE.EDIT && (
-				<>
-					<div className='edit-page'>
-						<div className='info-list'>
-							<div>
-								<InputLabel>Name*</InputLabel>
-								<div className='info'>
-									<Typography>{name}</Typography>
-								</div>
-							</div>
+			<div style={showResults === false ? {} : {display: 'none'}}>
+				<ValidationForm onsubmit={handeFormSubmit} />
+			</div>
 
-							<div>
-								<InputLabel>Email-Address*</InputLabel>
-								<div className='info'>
-									<Typography>{email}</Typography>
-								</div>
-							</div>
-						</div>
-
-						<div className='info-list'>
-							<div>
-								<InputLabel>Contact*</InputLabel>
-								<div className='info'>
-									<Typography>{contact}</Typography>
-								</div>
-							</div>
-
-							<div>
-								<InputLabel>Gender*</InputLabel>
-								<div className='info'>
-									<Typography>{gender}</Typography>
-								</div>
-							</div>
-						</div>
+			<div style={showResults === true ? {} : {display: 'none'}}>
+				<div className='edit-page'>
+					<div className='info-list'>
 						<div>
-							<InputLabel>Notes*</InputLabel>
-							<div className='notes'>
-								<Typography>{notes}</Typography>
+							<InputLabel>Name*</InputLabel>
+							<div className='info'>
+								<Typography>{name}</Typography>
 							</div>
 						</div>
-						<Button fullWidth onClick={() => setMode(MODE.SAVE)}>
-							Edit
-						</Button>
+
+						<div>
+							<InputLabel>Email-Address*</InputLabel>
+							<div className='info'>
+								<Typography>{email}</Typography>
+							</div>
+						</div>
 					</div>
-				</>
-			)}
+
+					<div className='info-list'>
+						<div>
+							<InputLabel>Contact*</InputLabel>
+							<div className='info'>
+								<Typography>{contact}</Typography>
+							</div>
+						</div>
+
+						<div>
+							<InputLabel>Gender*</InputLabel>
+							<div className='info'>
+								<Typography>{gender}</Typography>
+							</div>
+						</div>
+					</div>
+					<div>
+						<InputLabel>Notes*</InputLabel>
+						<div className='notes'>
+							<Typography>{notes}</Typography>
+						</div>
+					</div>
+					<Button fullWidth onClick={() => setShowResults(false)}>
+						Edit
+					</Button>
+				</div>
+			</div>
 		</div>
 	);
 }
